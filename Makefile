@@ -1,5 +1,5 @@
 CC = sdcc
-CFLAGS = -mstm8 --std-c99 --opt-code-size
+CFLAGS = -mstm8 --std-sdcc99 --opt-code-size
 INCLUDES = -I../stm8-header/
 
 

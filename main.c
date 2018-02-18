@@ -23,7 +23,7 @@ void main(void){
   PD_DDR |= (1<<0);
   PD_CR1 |= (1<<0);
 
-
+  
   PB_ODR |= (0<<6);
  
   while(1){
