@@ -21,7 +21,6 @@
 
 #include <stdint.h>
 
-/* REDEFINABLE */
 /* Port register definitions */
 /* Data direction register */
 #ifndef LCD_PORT_DDR
@@ -48,10 +47,7 @@
 #define LCD_PORT_D 2
 #endif
 
-/* NON REDEFINABLE */
-#define LCD_PORT_DATAMASK ((1<<LCD_PORT_E) | (1<<LCD_PORT_RS) | (0x0F << LCD_PORT_D));
-#define LCD_CMD 0
-#define LCD_DATA 1
+
 
 void lcd_gpioinit(void);
 

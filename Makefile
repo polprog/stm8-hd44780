@@ -1,7 +1,7 @@
-CC = ../../sdcc-7.3.0/bin/sdcc
+CC = sdcc
 CFLAGS = -mstm8 --std-sdcc99 --opt-code-size
-INCLUDES = -I ../../sdcc-7.3.0/include -I../stm8-header/ 
-LFLAGS = -Wl ../../sdcc-7.3.0/lib
+INCLUDES = -I../stm8-header/
+
 
 FLASHER = ../stm8flash
 
@@ -12,7 +12,7 @@ OBJS = $(SOURCES:%.c=%.rel)
 all: compile
 
 compile: $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(LFLAGS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS)
 
 
 

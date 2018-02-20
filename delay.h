@@ -1,38 +1,29 @@
 /* 
- * delay utilite for STM8 family
- * COSMIC and SDCC
- * Terentiev Oleg
- * t.oleg@ymail.com
- 
- * modified so SDCC compiles it by polprog 
+ * Based on delay.h by Oleg Terentiev 
+ * Hand tuned delay functions by polprog
  */
 
-#ifndef _UTIL_DELAY_H_
-#define _UTIL_DELAY_H_ 1
+#ifndef _DELAY_H_
+#define _DELAY_H_
 
-#ifndef F_CPU
-#warning F_CPU is not defined!
+/*CPU freq in KHZ */
+#ifndef F_CPU_K
+#warning F_CPU_K not defined!
 #endif
 
-#define T_COUNT(x) ((( F_CPU * x / 1000000UL )-5)/5 )
+#define T_COUNT(x) (((( F_CPU_K * x) / 1333)-5)/3)
+#define _delay_us( __us ) _delay_cycl( (uint16_t) ( T_COUNT(__us) ) )
 
-/* 
- * Func delayed N cycles, where N = 3 + ( ticks * 3 )
- * so, ticks = ( N - 3 ) / 3, minimum delay is 6 CLK
- * when tick = 1, because 0 equels 65535
- */
 
-static inline void _delay_cycl( unsigned short __ticks ){
+static inline void _delay_cycl( uint16_t __ticks ){
   __asm__("nop\n nop\n");  
   do { __ticks--; } while ( __ticks );
   __asm__("nop\n"); 
 }
 
-static inline void _delay_us(unsigned short __us ){
-  _delay_cycl( (unsigned short) (T_COUNT(__us)) );
-}
 
-static inline void _delay_ms( unsigned short __ms ){
+
+inline void _delay_ms( uint16_t __ms ){
   while ( __ms-- ){
     _delay_us( 1000 );
   }

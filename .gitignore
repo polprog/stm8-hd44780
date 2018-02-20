@@ -8,6 +8,3 @@
 *.rel 
 *.sym
 *.mem
-
-# discard emacs backups
-*.#*
