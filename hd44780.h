@@ -85,14 +85,36 @@
 #define LCD_DDRAM_SET 0x80
 #define LCD_LINE2 0x40
 
+
+/* 
+ * Initialize the GPIO pins
+ */
 void lcd_gpioinit(void);
 
-void lcd_send_byte(uint8_t b, uint8_t cmd);
-
-
+/*
+ * Initialize the display to 4 bit mode */
 void lcd_init();
 
+/*
+ * Send data or command byte
+ * b - data bit
+ * cmd - command (0) / data (1)
+ */
+void lcd_send_byte(uint8_t b, uint8_t cmd);
+
+/* 
+ * Send a null terminated string to the display
+ * \n is not supported
+ */
 void lcd_puts(uint8_t *c);
 
+/*
+ * Set cursor position
+ * l - line (0 or 1 usually)
+ * c - column
+ * Top left is (0, 0)
+ */
 void lcd_setpos(uint8_t l, uint8_t c);
+
+
 #endif

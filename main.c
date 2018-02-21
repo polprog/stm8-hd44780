@@ -1,3 +1,8 @@
+/*
+ * HD44780 LCD test/demo program for STM8
+ * By Chris "polprog" Lasocki
+ * 2018
+ */
 #include <stdint.h>
 #include <stm8s.h>
 

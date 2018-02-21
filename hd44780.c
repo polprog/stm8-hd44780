@@ -1,3 +1,21 @@
+/*
+ * HD44780 driver library for STM8 (sdcc)
+ * Uses 4 bit mode
+ *
+ * MCU-LCD pinout (default, override with defines):
+ * Px0 - RS
+ * Px1 - E
+ * Px2-5 - D4-D7
+ * where x is defined by LCD_PORT_*, by default PORTD
+ * RS, E can be freely assigned in range of the same port
+ * D4-D7 must be 4 consecutive pins (D4 is LSb of all 4)
+ * Redefine D4-D7 by defining D4 pin bit number
+ *
+ * By Chris "polprog" Lasocki
+ * 2018
+ */
+
+
 #include <stm8s.h>
 #include "hd44780.h"
 #include "delay.h"
@@ -8,11 +26,7 @@ void lcd_gpioinit(void){
   LCD_PORT_CR1 |= LCD_PORT_DATAMASK; //slow push pull output
 }
 
-/*
- * Send data/command byte
- * b - data bit
- * cmd - command (0) / data (1)
- */
+
 void lcd_send_byte(uint8_t b, uint8_t cmd){
   LCD_PORT_ODR &= ~( LCD_PORT_DATAMASK & ~(1<<LCD_PORT_E) ); //all bits off
   
@@ -20,18 +34,14 @@ void lcd_send_byte(uint8_t b, uint8_t cmd){
   LCD_PORT_ODR |= (cmd << LCD_PORT_RS); //command or data?
   
   LCD_PORT_ODR |= (1<<LCD_PORT_E); //E up
-  _delay_ms(10);
   LCD_PORT_ODR |= ( (b>>4) << LCD_PORT_D); //send data bit (MS nibble)
-  _delay_ms(10);
   LCD_PORT_ODR &= ~(1<<LCD_PORT_E); //E down
-  _delay_ms(10);
+  _delay_ms(2);
   LCD_PORT_ODR |= (1<<LCD_PORT_E); //E up
-  _delay_ms(10);
   LCD_PORT_ODR &= ~(0x0F << LCD_PORT_D);
   LCD_PORT_ODR |= ( (b & 0x0F) << LCD_PORT_D); //send data bit (LS nibble)
-  _delay_ms(10);
   LCD_PORT_ODR &= ~(1<<LCD_PORT_E); //E down
-  _delay_ms(10);
+  _delay_ms(2);
   LCD_PORT_ODR |= (1<<LCD_PORT_E); //E up
   
 }
