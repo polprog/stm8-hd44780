@@ -56,7 +56,7 @@ void lcd_init(){
   lcd_send_byte(0x02, LCD_CMD);
 }
 
-/* Print a null terminated string (supports newlines as LF)*/
+/* Print a null terminated string */
 void lcd_puts(uint8_t *c){
   while(*c){
     lcd_send_byte(*c, LCD_DATA);

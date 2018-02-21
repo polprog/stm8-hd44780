@@ -43,7 +43,7 @@
 #ifndef LCD_PORT_RS
 #define LCD_PORT_RS 1
 #endif
-/* Data pin 4 (first data pin, D5 = this + 1)*/
+/* Data pin 4 (first data pin, D5 = this + 1, ...)*/
 #ifndef LCD_PORT_D
 #define LCD_PORT_D 2
 #endif
