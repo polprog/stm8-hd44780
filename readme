@@ -3,9 +3,11 @@ Simple small HD44780 LCD library for STM8
 Files:
 =====
 	main.c - test and demo
+
 	delay.h - delay functions
 	hd44780.c - implementation
 	hd44780.h - header
+
 	readme - this file
 	COPYING - licence
 
@@ -30,10 +32,10 @@ Usage:
 =====
 
 Include hd44780.h and delay.h in your code, add the c file to the build
-path. Define F_CPU_K as CPU speed in KHz. Note that in this project the variable is defined in the Makefile!
+path. Define F_CPU_K as CPU speed in KHz. Note that in this project the macro is defined in the Makefile!
 
-delay.h contains LibC-AVR style functions _delay_ms() and _delay_cycl(), and a macro _delay_us(). All three let you use a variable as a parameter,
-in contrary to LibC-AVR.
+delay.h contains LibC-AVR style functions _delay_ms() and _delay_cycl(), and 
+a macro _delay_us(). All three let you use a variable as a parameter, in contrary to LibC-AVR.
 
 I found sdcc can do *weird things* with those so always check the corresponding .asm file. A badly expanded macro may result in calls to word mul and div, which take extra amount of time!
 
