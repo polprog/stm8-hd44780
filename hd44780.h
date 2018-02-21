@@ -73,8 +73,17 @@
 #define LCD_CUR_BLNK 0x01
 #define LCD_CUR_NBLNK 0x00
 
+/* Cursor or display shitft */
 
+#define LCD_CURDISP 0x10
+#define LCD_SHIFT_CUR 0x80
+#define LCD_SHIFT 0x00
+#define LCD_SHIFT_R 0x40
+#define LCD_SHIFT_L 0x00
 
+/* DDRAM set */
+#define LCD_DDRAM_SET 0x80
+#define LCD_LINE2 0x40
 
 void lcd_gpioinit(void);
 
@@ -85,4 +94,5 @@ void lcd_init();
 
 void lcd_puts(uint8_t *c);
 
+void lcd_setpos(uint8_t l, uint8_t c);
 #endif

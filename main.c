@@ -20,11 +20,14 @@ void main(void){
 
   lcd_gpioinit();
   lcd_init();
-  lcd_send_byte(0x0F, LCD_CMD);
+  lcd_send_byte(LCD_CTL | LCD_ON | LCD_CUR_ON | LCD_CUR_BLNK, LCD_CMD);
   
   //lcd_send_byte(0b00001111, LCD_CMD);
   //lcd_send_byte('a', LCD_DATA);
-  lcd_puts("aada");
+  lcd_puts("Hello from stm8");
+  lcd_setpos(1, 0);
+  lcd_puts(" to #avr <3 !");
+  lcd_send_byte(LCD_CTL | LCD_ON | LCD_CUR_OFF, LCD_CMD);
   return ;
   
   do {

@@ -48,8 +48,12 @@ void lcd_init(){
 
 /* Print a null terminated string (supports newlines as LF)*/
 void lcd_puts(uint8_t *c){
-  while(*c != 0){
+  while(*c){
     lcd_send_byte(*c, LCD_DATA);
     c++;
   }
+}
+
+void lcd_setpos(uint8_t l, uint8_t c){
+  lcd_send_byte(LCD_DDRAM_SET | c + (l * LCD_LINE2), LCD_CMD);
 }
