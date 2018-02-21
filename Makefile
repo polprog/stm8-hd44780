@@ -1,18 +1,17 @@
-CC = ../../sdcc-7.3.0/bin/sdcc
-CFLAGS = -mstm8 --std-sdcc99 --opt-code-size
+CC = sdcc
+CFLAGS = -mstm8 --std-sdcc99 --opt-code-size -DF_CPU_K=16000L
 INCLUDES = -I ../../sdcc-7.3.0/include -I../stm8-header/ 
-LFLAGS = -Wl ../../sdcc-7.3.0/lib
 
 FLASHER = ../stm8flash
 
-SOURCES = main.c
+SOURCES = main.c hd44780.c
 OBJS = $(SOURCES:%.c=%.rel)
 
 
 all: compile
 
 compile: $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(LFLAGS) $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS)
 
 
 

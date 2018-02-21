@@ -29,11 +29,11 @@
 #endif
 /* Control register 1 */
 #ifndef LCD_PORT_CR1
-#define LCD_PORT_DDR PD_CR1
+#define LCD_PORT_CR1 PD_CR1
 #endif
 /* Output data register */
 #ifndef LCD_PORT_ODR
-#define LCD_PORT_DDR PD_ODR
+#define LCD_PORT_ODR PD_ODR
 #endif
 /* Enable pin */
 #ifndef LCD_PORT_E
@@ -49,22 +49,40 @@
 #endif
 
 /* NON REDEFINABLE */
-#define LCD_PORT_DATAMASK ((1<<LCD_PORT_E) | (1<<LCD_PORT_RS) | (0x0F << LCD_PORT_D));
+/* General */
+#define LCD_PORT_DATAMASK ((1<<LCD_PORT_E) | (1<<LCD_PORT_RS) | (0x0F << LCD_PORT_D))
 #define LCD_CMD 0
 #define LCD_DATA 1
 
+/* Clear display */
+#define LCD_CLR 0x01
+
+/* Cursor home */
+#define LCD_HOME 0x02
+
+/* Entry mode set */
+#define LCD_EMS 0x04
+#define LCD_INC 0x02
+
+/* Display ON/OFF control */
+#define LCD_CTL 0x08
+#define LCD_ON 0x04
+#define LCD_OFF 0x00
+#define LCD_CUR_ON 0x02
+#define LCD_CUR_OFF 0x00
+#define LCD_CUR_BLNK 0x01
+#define LCD_CUR_NBLNK 0x00
+
+
+
+
 void lcd_gpioinit(void);
 
-void lcd_send_byte(uint8_t b);
+void lcd_send_byte(uint8_t b, uint8_t cmd);
 
 
-//void init();
+void lcd_init();
 
-//void putchar(uint8_t c);
-
-//void clear();
-
-//void home();
-
+void lcd_puts(uint8_t *c);
 
 #endif

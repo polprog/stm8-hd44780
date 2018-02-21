@@ -11,7 +11,7 @@
 #warning F_CPU_K not defined!
 #endif
 
-#define T_COUNT(x) (((( F_CPU_K * x) / 1333)-5)/3)
+#define T_COUNT(x) (((( F_CPU_K * x) / 13333)-5)/3)
 #define _delay_us( __us ) _delay_cycl( (uint16_t) ( T_COUNT(__us) ) )
 
 

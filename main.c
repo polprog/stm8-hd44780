@@ -1,66 +1,44 @@
 #include <stdint.h>
-
 #include <stm8s.h>
 
-<<<<<<< Updated upstream
-#define F_CPU_K 1600L
-#include "delay.h"
+#include "hd44780.h"
 
-void main(void){
-=======
 
-#define F_CPU 16000000
 #include "delay.h"
 
 
 
 
 
-
-
 void main(void){
- 
+
+  uint8_t a = 98;
+  
+  PB_DDR = 0xFF;
+  PB_CR1 = 0xFF;
 
 
->>>>>>> Stashed changes
-  /* external led on PB6 */
-  PB_DDR |= (1<<6);
-  PB_CR1 |= (1<<6);
+  lcd_gpioinit();
+  lcd_init();
+  lcd_send_byte(0x0F, LCD_CMD);
   
+  //lcd_send_byte(0b00001111, LCD_CMD);
+  //lcd_send_byte('a', LCD_DATA);
+  lcd_puts("aada");
+  return ;
   
-  /* onboard led */
-  PD_DDR |= (1<<0);
-  PD_CR1 |= (1<<0);
+  do {
+    
+    lcd_send_byte(a++, LCD_DATA);
+    PB_ODR = ~PB_ODR;
+    _delay_ms(100);
+  }while (1);
 
   
-  PB_ODR |= (1<<6);
- 
   while(1){
     PD_ODR = ~PD_ODR;
-<<<<<<< Updated upstream
     _delay_us(100);
     PD_ODR = ~PD_ODR;
     _delay_us(50);
-=======
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);PD_ODR = ~PD_ODR;
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);
-    PD_ODR = ~PD_ODR;
-    _delay_ms(10);
->>>>>>> Stashed changes
-    
   }
 }
