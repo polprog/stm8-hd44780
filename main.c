@@ -12,12 +12,6 @@
 
 void main(void){
 
-  uint8_t a = 98;
-  
-  PB_DDR = 0xFF;
-  PB_CR1 = 0xFF;
-
-
   lcd_gpioinit();
   lcd_init();
   lcd_send_byte(LCD_CTL | LCD_ON | LCD_CUR_ON | LCD_CUR_BLNK, LCD_CMD);

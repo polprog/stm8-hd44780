@@ -28,9 +28,10 @@ void lcd_gpioinit(void){
 
 
 void lcd_send_byte(uint8_t b, uint8_t cmd){
+  cmd &= 0x01;
+ 
   LCD_PORT_ODR &= ~( LCD_PORT_DATAMASK & ~(1<<LCD_PORT_E) ); //all bits off
-  
-  
+
   LCD_PORT_ODR |= (cmd << LCD_PORT_RS); //command or data?
   
   LCD_PORT_ODR |= (1<<LCD_PORT_E); //E up
